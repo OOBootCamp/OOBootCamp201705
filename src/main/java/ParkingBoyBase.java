@@ -2,17 +2,17 @@ import java.util.List;
 
 public abstract class ParkingBoyBase implements ParkingAble {
     protected List<ParkingLot> parkingLots;
+    private PickHelper pickHelper;
 
     public ParkingBoyBase(List<ParkingLot> parkingLots) {
+        pickHelper = new PickHelper();
         this.parkingLots = parkingLots;
     }
 
     public abstract Token park(Car car);
 
     public Car pick(Token token) {
-        for (ParkingLot parkingLot : parkingLots)
-            if (parkingLot.containToken(token)) return parkingLot.pick(token);
-        throw new CarNotExistException();
+        return pickHelper.pick(token, parkingLots);
     }
 
     public boolean containToken(Token token) {

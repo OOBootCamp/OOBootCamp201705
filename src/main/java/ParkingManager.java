@@ -1,6 +1,7 @@
 import java.util.List;
 
 class ParkingManager {
+    private final PickHelper pickHelper = new PickHelper();
     private List<ParkingAble> parkingLots;
 
     ParkingManager(List<ParkingAble> parkingLots) {
@@ -14,9 +15,7 @@ class ParkingManager {
     }
 
     public Car pick(Token token) {
-        for (ParkingAble parkingLot : parkingLots)
-            if (parkingLot.containToken(token)) return parkingLot.pick(token);
-        throw new CarNotExistException();
-
+        return pickHelper.pick(token, parkingLots);
     }
+
 }
