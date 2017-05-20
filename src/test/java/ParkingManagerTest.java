@@ -3,10 +3,18 @@ import org.junit.Test;
 
 import java.util.Arrays;
 
-public class ParkingBoyTest {
+public class ParkingManagerTest {
     @Test
     public void should_pick_and_park_car_with_one_parking_lot() throws Exception {
-        NormalParkingBoy parkingBoy = new NormalParkingBoy(Arrays.asList(new ParkingLot(1)));
+        ParkingManager parkingBoy = new ParkingManager(Arrays.asList(new ParkingLot(1)));
+        Car car = new Car();
+
+        Assert.assertSame(car, parkingBoy.pick(parkingBoy.park(car)));
+    }
+
+    @Test
+    public void should_pick_and_park_car_with_one_parking_boy() throws Exception {
+        ParkingManager parkingBoy = new ParkingManager(Arrays.asList(new NormalParkingBoy(Arrays.asList(new ParkingLot(1)))));
         Car car = new Car();
 
         Assert.assertSame(car, parkingBoy.pick(parkingBoy.park(car)));
@@ -14,7 +22,7 @@ public class ParkingBoyTest {
 
     @Test
     public void should_pick_and_park_car_with_two_parking_lot() throws Exception {
-        NormalParkingBoy parkingBoy = new NormalParkingBoy(Arrays.asList(new ParkingLot(1),new ParkingLot(1)));
+        ParkingManager parkingBoy = new ParkingManager(Arrays.asList(new ParkingLot(1),new ParkingLot(1)));
         Car car = new Car();
 
         Assert.assertSame(car, parkingBoy.pick(parkingBoy.park(car)));
@@ -23,7 +31,7 @@ public class ParkingBoyTest {
     @Test
     public void should_park_car_to_second_parking_lot_given_first_parking_lot_is_full() throws Exception {
         ParkingLot secondParkingLot = new ParkingLot(1);
-        NormalParkingBoy parkingBoy = new NormalParkingBoy(Arrays.asList(new ParkingLot(1), secondParkingLot));
+        ParkingManager parkingBoy = new ParkingManager(Arrays.asList(new ParkingLot(1), secondParkingLot));
         parkingBoy.park(new Car());
 
         Car car = new Car();
@@ -34,7 +42,7 @@ public class ParkingBoyTest {
     @Test
     public void should_pick_and_park_car_given_first_parking_lot_is_full() throws Exception {
         ParkingLot parkingLot = new ParkingLot(1);
-        NormalParkingBoy parkingBoy = new NormalParkingBoy(Arrays.asList(new ParkingLot(1), parkingLot));
+        ParkingManager parkingBoy = new ParkingManager(Arrays.asList(new ParkingLot(1), parkingLot));
         parkingBoy.park(new Car());
 
         Car car = new Car();
@@ -44,7 +52,7 @@ public class ParkingBoyTest {
     @Test(expected = FullException.class)
     public void should_pick_and_park_car_given_all_parking_lot_is_full() throws Exception {
         ParkingLot parkingLot = new ParkingLot(1);
-        NormalParkingBoy parkingBoy = new NormalParkingBoy(Arrays.asList(new ParkingLot(1), parkingLot));
+        ParkingManager parkingBoy = new ParkingManager(Arrays.asList(new ParkingLot(1), parkingLot));
         parkingBoy.park(new Car());
         parkingBoy.park(new Car());
 

@@ -1,6 +1,6 @@
 import java.util.HashMap;
 
-class ParkingLot {
+class ParkingLot implements ParkingAble {
     private HashMap<Token, Car> tokenCarHashMap = new HashMap<>();
     private int capacity;
 
@@ -8,7 +8,7 @@ class ParkingLot {
         this.capacity = capacity;
     }
 
-    Token park(Car car) {
+    public Token park(Car car) {
         if (isFull()) throw new FullException();
 
         Token token = new Token();
@@ -16,24 +16,24 @@ class ParkingLot {
         return token;
     }
 
-    Car pick(Token token) {
+    public Car pick(Token token) {
         if (!tokenCarHashMap.containsKey(token)) throw new CarNotExistException();
         return tokenCarHashMap.remove(token);
     }
 
-    boolean isFull() {
+    public boolean isFull() {
         return tokenCarHashMap.size() == capacity;
     }
 
-    boolean containToken(Token token) {
+    public boolean containToken(Token token) {
         return tokenCarHashMap.containsKey(token);
     }
 
-    public int spots() {
+    int spots() {
         return capacity - tokenCarHashMap.size();
     }
 
-    public double vacancy() {
+    double vacancy() {
         double v = (spots() * 1.0) / capacity;
         return v;
     }

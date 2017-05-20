@@ -7,7 +7,7 @@ class SuperParkingBoy extends ParkingBoyBase{
         super(parkingLots);
     }
 
-    Token park(Car car) {
+    public Token park(Car car) {
         return parkingLots
                 .stream()
                 .max(Comparator.comparingDouble(ParkingLot::vacancy))
