@@ -28,4 +28,8 @@ class ParkingLot {
     boolean containToken(Token token) {
         return tokenCarHashMap.containsKey(token);
     }
+
+    public int spots() {
+        return capacity - tokenCarHashMap.size();
+    }
 }
