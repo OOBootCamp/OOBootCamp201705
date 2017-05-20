@@ -32,4 +32,9 @@ class ParkingLot {
     public int spots() {
         return capacity - tokenCarHashMap.size();
     }
+
+    public double vacancy() {
+        double v = (spots() * 1.0) / capacity;
+        return v;
+    }
 }

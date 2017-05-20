@@ -1,15 +1,16 @@
 import java.util.Comparator;
 import java.util.List;
 
-class SmartParkingBoy extends ParkingBoyBase {
-    SmartParkingBoy(List<ParkingLot> parkingLots) {
+class SuperParkingBoy extends ParkingBoyBase{
+
+    SuperParkingBoy(List<ParkingLot> parkingLots) {
         super(parkingLots);
     }
 
     Token park(Car car) {
         return parkingLots
                 .stream()
-                .max(Comparator.comparingInt(ParkingLot::spots))
+                .max(Comparator.comparingDouble(ParkingLot::vacancy))
                 .get()
                 .park(car);
     }
