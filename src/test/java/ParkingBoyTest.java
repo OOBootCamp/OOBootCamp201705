@@ -40,4 +40,14 @@ public class ParkingBoyTest {
         Car car = new Car();
         Assert.assertSame(car, parkingBoy.pick(parkingBoy.park(car)));
     }
+
+    @Test(expected = FullException.class)
+    public void should_pick_and_park_car_given_all_parking_lot_is_full() throws Exception {
+        ParkingLot parkingLot = new ParkingLot(1);
+        ParkingBoy parkingBoy = new ParkingBoy(Arrays.asList(new ParkingLot(1), parkingLot));
+        parkingBoy.park(new Car());
+        parkingBoy.park(new Car());
+
+        parkingBoy.park(new Car());
+    }
 }
